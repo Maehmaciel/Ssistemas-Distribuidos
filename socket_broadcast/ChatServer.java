@@ -29,8 +29,9 @@ public class ChatServer{
     }
 
 
-    public void enviaMsgTodos(String msg){
+    public void enviaMsgTodos(String msg,ClientSocket cli){
         for(ClientSocket cl: clientes){
+            if(!(cl==cli))
             cl.enviarMsg(msg);
         }
 

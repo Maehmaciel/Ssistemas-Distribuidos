@@ -33,7 +33,7 @@ public class ClientSocket implements Runnable {
                 do{
                 m=in.readLine();
                 System.out.println("Msg do cliente:"+m);
-                server.enviaMsgTodos(m);
+                server.enviaMsgTodos(m,this);
                 }while(!m.equals(null));
             
         } catch (IOException e) {
