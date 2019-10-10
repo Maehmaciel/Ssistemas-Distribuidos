@@ -103,11 +103,26 @@ public class TheServidor {
         buffer.flip();
         byte[] data = new byte[bytesRead];
         buffer.get(data);
+        String mensagem=new String(data);
+        //se nao estiver mandando pra um usuario especifico
+        if(!mensagem.substring(0,1).equals("@"))
         System.out.println(
             "Mensagem recebida do cliente " +
-            clientChannel.getRemoteAddress() + ": " + new String(data) +
+            clientChannel.getRemoteAddress() + ": " + mensagem +
             " (" + bytesRead + " bytes lidos)");
             //mostra a msg
+        else{
+            sendPrivateMessage(mensagem);
+        
+
+        
+    }
+    }
+
+    private void sendPrivateMessage(String mensagem) throws IOException{
+        String usuario=mensagem.split(" ")[0].substring(0);
+        byte[] msg=usuario.getBytes();
+        clientes.get(0).write(ByteBuffer.wrap(msg));
     }
    
     public static void main(String[] args) {
